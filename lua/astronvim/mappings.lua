@@ -23,11 +23,6 @@ local sections = {
 maps.n["<leader>bn"] = { "<cmd>:bnext<cr>", desc = "Moves buffer right" }
 maps.n["<leader>bb"] = { "<cmd>:bprev<cr>", desc = "Moves buffer left" }
 
-maps.n["<leader>Right"] = { "<c-w>Right", desc = "Moves the the right window" }
-maps.n["<leader>Up"] = { "<c-w>Up", desc = "Moves the the up window" }
-maps.n["<leader>Down"] = { "<c-w>Down", desc = "Moves the the right window" }
-maps.n["<leader>Left"] = { "<c-w>Left", desc = "Moves the the left window" }
-
 -- Normal --
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
