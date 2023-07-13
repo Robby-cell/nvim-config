@@ -26,6 +26,11 @@ maps.n["<leader>bb"] = { "<cmd>:bprev<cr>", desc = "Moves buffer left" }
 maps.n["<leader>["] = { "V<", desc = "Removes indent" }
 maps.n["<leader>]"] = { "V>", desc = "Adds indent" }
 
+maps.n["<A-j>"] = { "<cmd>:move +1<cr>", desc = "Moves a line down" }
+maps.n["<A-k>"] = { "<cmd>:move -2<cr>", desc = "Moves a line up" }
+
+-- end --
+
 -- Normal --
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
