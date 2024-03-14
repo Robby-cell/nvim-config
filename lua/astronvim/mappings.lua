@@ -30,6 +30,9 @@ maps.n["<A-k>"] = { "<cmd>:move -2<cr>", desc = "Moves a line up" }
 
 maps.n[";"] = { ":", desc = "Command mode" }
 
+maps.n["<tab>"] = { "<cmd>:bnext<cr>", desc = "Moves buffer right" }
+maps.n["<S-tab>"] = { "<cmd>:bprev<cr>", desc = "Moves buffer left" }
+
 maps.v["<C-e>"] = { 'c<C-r>=<C-r>"', desc = "Evaluate expression" }
 
 -- end --
@@ -342,17 +345,18 @@ end
 
 -- NeoTree
 if is_available("neo-tree.nvim") then
-	maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
-	maps.n["<leader>o"] = {
-		function()
-			if vim.bo.filetype == "neo-tree" then
-				vim.cmd.wincmd("p")
-			else
-				vim.cmd.Neotree("focus")
-			end
-		end,
-		desc = "Toggle Explorer Focus",
-	}
+	maps.n["<C-n>"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+	maps.n["<leader>e"] = { "<cmd>Neotree focus<cr>", desc = "Focus neotree" }
+	-- maps.n["<leader>e"] = {
+	-- 	function()
+	-- 		if vim.bo.filetype == "neo-tree" then
+	-- 			vim.cmd.wincmd("p")
+	-- 		else
+	-- 			vim.cmd.Neotree("focus")
+	-- 		end
+	-- 	end,
+	-- 	desc = "Toggle Explorer Focus",
+	-- }
 end
 
 -- Session Manager
@@ -363,7 +367,7 @@ if is_available("neovim-session-manager") then
 	maps.n["<leader>Sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
 	maps.n["<leader>Sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
 	maps.n["<leader>S."] =
-		{ "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
+	{ "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
 end
 if is_available("resession.nvim") then
 	maps.n["<leader>S"] = sections.S
@@ -527,7 +531,7 @@ if is_available("telescope.nvim") then
 				end -- don't search the astronvim core files
 				if vim.fn.isdirectory(dir) == 1 then
 					table.insert(search_dirs, dir)
-				end -- add directory to search if exists
+				end                             -- add directory to search if exists
 			end
 			if vim.tbl_isempty(search_dirs) then -- if no config folders found, show warning
 				utils.notify("No user configuration files found", vim.log.levels.WARN)
@@ -657,7 +661,7 @@ if is_available("toggleterm.nvim") then
 			function()
 				local worktree = require("astronvim.utils.git").file_worktree()
 				local flags = worktree and (" --work-tree=%s --git-dir=%s"):format(worktree.toplevel, worktree.gitdir)
-					or ""
+						or ""
 				utils.toggle_term_cmd("lazygit " .. flags)
 			end,
 			desc = "ToggleTerm lazygit",
@@ -722,7 +726,7 @@ if is_available("nvim-dap") then
 			require("dap").terminate()
 		end,
 		desc = "Debugger: Stop",
-	} -- Shift+F5
+	}                  -- Shift+F5
 	maps.n["<F21>"] = { -- Shift+F9
 		function()
 			vim.ui.input({ prompt = "Condition: " }, function(condition)
